@@ -76,6 +76,7 @@ lazy val root = tlCrossRootProject
 
 lazy val core = crossProject(JVMPlatform, JSPlatform, NativePlatform)
   .in(file("modules/core"))
+  .settings(headerSettings)
   .settings(
     name := "http4s-aws",
     libraryDependencies ++= Seq(
@@ -113,6 +114,7 @@ lazy val core = crossProject(JVMPlatform, JSPlatform, NativePlatform)
 
 lazy val s3 = crossProject(JVMPlatform, JSPlatform, NativePlatform)
   .in(file("modules/s3"))
+  .settings(headerSettings)
   .dependsOn(core)
   .settings(
     name := "http4s-aws-s3",
@@ -152,3 +154,12 @@ lazy val s3 = crossProject(JVMPlatform, JSPlatform, NativePlatform)
     tlVersionIntroduced := List("2.13", "3").map(_ -> "6.5.0").toMap,
     Test / nativeBrewFormulas += "openssl"
   )
+
+lazy val headerSettings = Seq(
+  headerLicense := Some(
+    HeaderLicense.Custom(
+      "Copyright 2025 Magine Pro\n" +
+        HeaderLicense.ALv2("2026", "Viktor Rudebeck", HeaderLicenseStyle.Detailed).text
+    )
+  )
+)
